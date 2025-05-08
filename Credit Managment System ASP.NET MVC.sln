@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credit Managment System ASP.NET MVC", "Credit Managment System ASP.NET MVC.csproj", "{489EA626-B458-41F9-9AE4-A0524FAFF325}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{489EA626-B458-41F9-9AE4-A0524FAFF325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{489EA626-B458-41F9-9AE4-A0524FAFF325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{489EA626-B458-41F9-9AE4-A0524FAFF325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{489EA626-B458-41F9-9AE4-A0524FAFF325}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6284D07-220D-4C95-AB8C-F0AA2032E762}
+	EndGlobalSection
+EndGlobal
