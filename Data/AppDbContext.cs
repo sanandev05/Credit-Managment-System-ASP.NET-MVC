@@ -28,12 +28,6 @@ namespace Credit_Managment_System_ASP.NET_MVC.Data
             .HasForeignKey(li => li.LoanId)
             .OnDelete(DeleteBehavior.Restrict);  
 
-            modelBuilder.Entity<Category>()
-             .HasOne(c => c.ParentCategory)
-                .WithMany(s => s.Subcategories)
-                .HasForeignKey(Category => Category.ParentCategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
-
         }
 
     }
