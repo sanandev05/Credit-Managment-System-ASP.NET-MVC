@@ -6,7 +6,7 @@ using Credit_Managment_System_ASP.NET_MVC.View_Models;
 
 namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 {
-    public class BranchService 
+    public class BranchService : IBranchService
     {
         private readonly IBranchRepository _repo;
         private readonly IMapper _mapper;

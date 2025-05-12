@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Credit_Managment_System_ASP.NET_MVC.Models;
 using Credit_Managment_System_ASP.NET_MVC.Repositories.Interfaces;
+using Credit_Managment_System_ASP.NET_MVC.Services.Interfaces;
 using Credit_Managment_System_ASP.NET_MVC.View_Models;
 
 namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 {
-    public class CategoryService 
+    public class CategoryService : ICategoryService
     {
         private readonly IGenericRepository<Category> _repo;
         private readonly IMapper _mapper;

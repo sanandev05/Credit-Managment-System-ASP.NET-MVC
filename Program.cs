@@ -1,6 +1,8 @@
 using Credit_Managment_System_ASP.NET_MVC.Data;
 using Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations;
 using Credit_Managment_System_ASP.NET_MVC.Repositories.Interfaces;
+using Credit_Managment_System_ASP.NET_MVC.Services.Implementations;
+using Credit_Managment_System_ASP.NET_MVC.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
