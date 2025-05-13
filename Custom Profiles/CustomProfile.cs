@@ -8,16 +8,16 @@ namespace Credit_Managment_System_ASP.NET_MVC.Custom_Profiles
     {
         public CustomProfile()
         {
-            CreateMap<Branch,BranchVM>();
-            CreateMap<Merchant,MerchantVM>();
-            CreateMap<Customer, CustomerVM>();
-            CreateMap<Category, CategoryVM>();
-            CreateMap<Customer, CustomerVM>();
-            CreateMap<Employee, EmployeeVM>();
-            CreateMap<Loan, LoanVM>();
-            CreateMap<LoanItem, LoanItemVM>();
-            CreateMap<LoanDetail, LoanDetailVM>();
-            CreateMap<Payment, PaymentVM>();
+            CreateMap<Branch,BranchVM>().ReverseMap();
+            CreateMap<Merchant,MerchantVM>().ReverseMap();
+            CreateMap<Customer, CustomerVM>().ReverseMap();
+            CreateMap<Category, CategoryVM>().ReverseMap();
+            CreateMap<Customer, CustomerVM>().ReverseMap();
+            CreateMap<Employee, EmployeeVM>().ReverseMap();
+            CreateMap<Loan, LoanVM>().ReverseMap();
+            CreateMap<LoanItem, LoanItemVM>().ReverseMap();
+            CreateMap<LoanDetail, LoanDetailVM>().ReverseMap();
+            CreateMap<Payment, PaymentVM>().ReverseMap();
         }
     }
     

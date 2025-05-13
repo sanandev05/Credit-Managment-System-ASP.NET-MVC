@@ -1,4 +1,5 @@
-﻿using Credit_Managment_System_ASP.NET_MVC.Data;
+﻿using AutoMapper;
+using Credit_Managment_System_ASP.NET_MVC.Data;
 using Credit_Managment_System_ASP.NET_MVC.Models;
 using Credit_Managment_System_ASP.NET_MVC.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -8,10 +9,11 @@ namespace Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity, new()
     {
         private readonly AppDbContext _context;
-
-        public GenericRepository(AppDbContext context)
+        private readonly IMapper _mapper;
+        public GenericRepository(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)
@@ -44,13 +46,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-           var getEntity = await _context.Set<TEntity>().Where(x=> !x.IsDeleted).FirstOrDefaultAsync(x=>x.Id==entity.Id);
-            if (getEntity != null)
-            {      
-                getEntity.UpdatedAt = DateTime.UtcNow;
-                _context.Update(getEntity);
-                _context.SaveChanges();
-            }
+            entity.UpdatedAt = DateTime.UtcNow;
+            _context.Update(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
     }

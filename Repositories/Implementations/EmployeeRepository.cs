@@ -1,4 +1,5 @@
-﻿using Credit_Managment_System_ASP.NET_MVC.Data;
+﻿using AutoMapper;
+using Credit_Managment_System_ASP.NET_MVC.Data;
 using Credit_Managment_System_ASP.NET_MVC.Models;
 using Credit_Managment_System_ASP.NET_MVC.Repositories.Interfaces;
 
@@ -6,8 +7,12 @@ namespace Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations
 {
     public class EmployeeRepository : GenericRepository<Employee>, IEmployeeRepository
     {
-        public EmployeeRepository(AppDbContext context) : base(context)
+        private readonly IMapper _mapper;
+        private readonly AppDbContext _context;
+        public EmployeeRepository(AppDbContext context, IMapper mapper) : base(context, mapper)
         {
+            _context = context;
+            _mapper = mapper;
         }
     }
     

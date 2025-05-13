@@ -8,9 +8,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 {
     public class ProductService : IProductService
     {
-        private readonly IGenericRepository<Product> _repo;
+        private readonly IProductRepository _repo;
         private readonly IMapper _mapper;
-        public ProductService(IGenericRepository<Product> repo, IMapper mapper)
+        public ProductService(IProductRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
@@ -53,7 +53,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 
         public async Task<IEnumerable<ProductVM>> GetAllAsync()
         {
-            var products = await _repo.GetAllAsync();
+            var products = await _repo.GetAllWithInclude();
 
 
             return _mapper.Map<IEnumerable<ProductVM>>(products);
@@ -61,20 +61,8 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 
         public async Task<ProductVM> GetByIdAsync(int id)
         {
-            var categories = await _repo.GetAllAsync();
-            return categories.Select(item => new ProductVM()
-            {
-                loanItems = _mapper.Map<ICollection<LoanItemVM>>(item.loanItems),
-                Category = _mapper.Map<CategoryVM>(item.Category),
-                Description = item.Description,
-                Name = item.Name,
-                Price = item.Price,
-                Id = item.Id,
-                CategoryId = item.CategoryId,
-                ImageUrl = item.ImageUrl,
-                CreatedAt = item.CreatedAt,
-                UpdatedAt = item.UpdatedAt,
-            }).FirstOrDefault(x => x.Id == id);
+            var category = await _repo.GetByIdWithInclude(id);
+            return _mapper.Map<ProductVM>(category);
         }
 
         public async Task UpdateAsync(ProductVM entity)

@@ -3,14 +3,15 @@ using Credit_Managment_System_ASP.NET_MVC.Models;
 using Credit_Managment_System_ASP.NET_MVC.Repositories.Interfaces;
 using Credit_Managment_System_ASP.NET_MVC.Services.Interfaces;
 using Credit_Managment_System_ASP.NET_MVC.View_Models;
+using NuGet.Protocol.Core.Types;
 
 namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 {
     public class CategoryService : ICategoryService
     {
-        private readonly IGenericRepository<Category> _repo;
+        private readonly ICategoryRepository _repo;
         private readonly IMapper _mapper;
-        public CategoryService(IGenericRepository<Category> repo, IMapper mapper)
+        public CategoryService(ICategoryRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
@@ -22,10 +23,8 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
                 return null;
             }
 
-            var branch = new Category
+            var category = new Category
             {
-                MerchantId = entity.MerchantId,
-                Merchant = _mapper.Map<Merchant>(entity.MerchantVMs),
                 Products = _mapper.Map<ICollection<Product>>(entity.ProductVMs),
                 ParentId = entity.ParentId,
                 Name = entity.Name,
@@ -33,8 +32,8 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
                 UpdatedAt = DateTime.UtcNow,
 
             };
-            await _repo.AddAsync(branch);
-            return _mapper.Map<CategoryVM>(branch);
+            await _repo.AddAsync(category);
+            return _mapper.Map<CategoryVM>(category);
         }
 
         public Task<bool> DeleteAsync(int id)
@@ -50,7 +49,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 
         public async Task<IEnumerable<CategoryVM>> GetAllAsync()
         {
-            var categories = await _repo.GetAllAsync();
+            var categories = await _repo.GetAllWithInclude();
 
 
             return _mapper.Map<IEnumerable<CategoryVM>>(categories);
@@ -58,24 +57,21 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 
         public async Task<CategoryVM> GetByIdAsync(int id)
         {
-            var categories = await _repo.GetAllAsync();
-            return categories.Select(item => new CategoryVM()
-            {
-                Name = item.Name,
-                ProductVMs = _mapper.Map<ICollection<ProductVM>>(item.Products),
-                MerchantId = item.MerchantId,
-                MerchantVMs = _mapper.Map<MerchantVM>(item.Merchant),
-                ParentId = item.ParentId,
-                CreatedAt = item.CreatedAt,
-                UpdatedAt = item.UpdatedAt,
-            }).FirstOrDefault(x => x.Id == id);
-        }
+            var category = await _repo.GetByIdWithInclude(id);
+           return _mapper.Map<CategoryVM>(category);
 
+
+        }
         public async Task UpdateAsync(CategoryVM entity)
         {
-            var getData = await _repo.GetByIdAsync(entity.Id);
-            await _repo.UpdateAsync(getData);
+
+            var data = _mapper.Map<Category>(entity);
+            var result = await _repo.UpdateAsync(data);
+            if (result == null)
+            {
+                throw new Exception("Category not found");
+            }
+            var entityVM = _mapper.Map<CategoryVM>(data);
+            
         }
-    }
-    
-}
+    } }

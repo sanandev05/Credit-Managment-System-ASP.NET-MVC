@@ -18,7 +18,8 @@
             <th>Price</th>
             <th>Image</th>
             <th>Category</th>
-            <th></th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
         </tr>
     </thead>
     <tbody>
@@ -35,11 +36,15 @@
                     }
                 </td>
                 <td>@item.Category?.Name</td>
+                <td>@item.CreatedAt</td>
+                <td>@item.UpdatedAt</td>
+
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
                 </td>
+
             </tr>
         }
     </tbody>

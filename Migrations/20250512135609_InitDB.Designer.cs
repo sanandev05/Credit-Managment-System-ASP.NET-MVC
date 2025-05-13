@@ -4,6 +4,7 @@ using Credit_Managment_System_ASP.NET_MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250512135609_InitDB")]
+    partial class InitDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,9 +76,6 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -93,8 +93,6 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Categories");
                 });
@@ -414,13 +412,6 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                     b.Navigation("Merchant");
                 });
 
-            modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Category", b =>
-                {
-                    b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Category", null)
-                        .WithMany("ParentCategories")
-                        .HasForeignKey("CategoryId");
-                });
-
             modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Employee", b =>
                 {
                     b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Branch", "Branch")
@@ -514,8 +505,6 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 
             modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Category", b =>
                 {
-                    b.Navigation("ParentCategories");
-
                     b.Navigation("Products");
                 });
 

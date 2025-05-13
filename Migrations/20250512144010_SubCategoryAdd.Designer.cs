@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250508194224_InitDB")]
-    partial class InitDB
+    [Migration("20250512144010_SubCategoryAdd")]
+    partial class SubCategoryAdd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,20 +76,20 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("MerchantId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParentCategoryId")
+                    b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -97,11 +97,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MerchantId");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("ParentCategoryId");
-
-                    b.ToTable("categories");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Customer", b =>
@@ -340,6 +338,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -353,6 +354,8 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("LoanId");
 
@@ -378,7 +381,6 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -391,6 +393,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -398,7 +403,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Branch", b =>
@@ -414,20 +419,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 
             modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Category", b =>
                 {
-                    b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Merchant", "Merchant")
-                        .WithMany()
-                        .HasForeignKey("MerchantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Category", "ParentCategory")
-                        .WithMany("Subcategories")
-                        .HasForeignKey("ParentCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Merchant");
-
-                    b.Navigation("ParentCategory");
+                    b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Category", null)
+                        .WithMany("ParentCategories")
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Employee", b =>
@@ -492,6 +486,10 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 
             modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Payment", b =>
                 {
+                    b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Customer", null)
+                        .WithMany("Payments")
+                        .HasForeignKey("CustomerId");
+
                     b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Loan", "Loan")
                         .WithMany("Payments")
                         .HasForeignKey("LoanId")
@@ -519,14 +517,16 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 
             modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Category", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("ParentCategories");
 
-                    b.Navigation("Subcategories");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Customer", b =>
                 {
                     b.Navigation("Loans");
+
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("Credit_Managment_System_ASP.NET_MVC.Models.Employee", b =>
