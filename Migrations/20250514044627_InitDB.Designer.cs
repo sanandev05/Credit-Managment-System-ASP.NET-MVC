@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250512144010_SubCategoryAdd")]
-    partial class SubCategoryAdd
+    [Migration("20250514044627_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

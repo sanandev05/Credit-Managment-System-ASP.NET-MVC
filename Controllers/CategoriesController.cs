@@ -117,16 +117,26 @@ namespace Credit_Managment_System_ASP.NET_MVC.Controllers
             {
                 return NotFound();
             }
-
                
             var category = await _categoryService.GetByIdAsync(id);
             if (category == null)
             {
                 return NotFound();
             }
-            _categoryService.DeleteAsync(id);
-
             return View(category);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+         public async Task<IActionResult> Delete(CategoryVM model)
+        {
+            if (model.Id == 0)
+            {
+                return NotFound();
+            }
+               
+            
+            await _categoryService.DeleteAsync(model.Id);
+            return RedirectToAction(nameof(Index));
         }
 		public async Task<IActionResult> SubCategory(int parentId)
 		{

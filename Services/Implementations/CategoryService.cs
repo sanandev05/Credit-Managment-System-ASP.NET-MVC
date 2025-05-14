@@ -36,15 +36,15 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
             return _mapper.Map<CategoryVM>(category);
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var getData = _repo.GetByIdAsync(id);
+            var getData =await _repo.GetByIdAsync(id);
             if (getData == null)
             {
-                return Task.FromResult(false);
+                return false;
             }
-            _repo.DeleteAsync(id);
-            return Task.FromResult(true);
+            await _repo.DeleteAsync(id);
+            return true;
         }
 
         public async Task<IEnumerable<CategoryVM>> GetAllAsync()
