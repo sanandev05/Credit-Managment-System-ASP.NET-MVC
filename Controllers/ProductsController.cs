@@ -25,8 +25,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Controllers
         }
         public async Task<IActionResult> Create()
         {
-            ProductVM model = new ProductVM();
-            //model.CategoryVMs=await _categoryService.GetAllAsync().ContinueWith(y=>y.);
+            ViewBag.Categories=await _categoryService.GetAllAsync();
             return View();
         }
         [HttpPost]
