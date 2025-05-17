@@ -27,6 +27,8 @@ namespace Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations
         {
             var getEntity = await _context.Set<TEntity>().FindAsync(id);
             getEntity.IsDeleted = true;
+             _context.Update(getEntity);
+
             await _context.SaveChangesAsync();
             return true;
         }
@@ -46,8 +48,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            entity.UpdatedAt = DateTime.UtcNow;
-            _context.Update(entity);
+            entity.UpdatedAt = DateTime.Now;
             await _context.SaveChangesAsync();
             return entity;
         }

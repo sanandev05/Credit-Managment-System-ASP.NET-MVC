@@ -33,8 +33,8 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
                 Name = entity.Name,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-
-            };
+       
+			};
             await _repo.AddAsync(branch);
             return _mapper.Map<BranchVM>(branch); 
         }
@@ -61,24 +61,23 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
         public async Task<BranchVM> GetByIdAsync(int id)
         {
             var allBranches = await _repo.GetAllAsync();
-            return allBranches.Select(item => new BranchVM()
-            {
-                Name = item.Name,
-                Email = item.Email,
-                PhoneNumber = item.PhoneNumber,
-                Address = item.Address,
-                MerchantId = item.MerchantId,
-                MerchantVM = _mapper.Map<MerchantVM>(item.Merchant),
-                EmployeeVMs = _mapper.Map<ICollection<EmployeeVM>>(item.Employees),
-                CreatedAt = item.CreatedAt,
-                UpdatedAt = item.UpdatedAt,
-            }).FirstOrDefault(x => x.Id == id);
-        }
+            return _mapper.Map<BranchVM>(allBranches.FirstOrDefault(x => x.Id == id));
+		}
 
         public async Task UpdateAsync(BranchVM entity)
         {
             var getData = await _repo.GetByIdAsync(entity.Id);
-            await _repo.UpdateAsync(getData);
+            getData.PhoneNumber = entity.PhoneNumber;
+			getData.Email = entity.Email;
+            getData.PhoneNumber = entity.PhoneNumber;
+			getData.Address = entity.Address;
+			getData.MerchantId = entity.MerchantId;
+			getData.Merchant = _mapper.Map<Merchant>(entity.MerchantVM);
+			getData.Employees = _mapper.Map<ICollection<Employee>>(entity.EmployeeVMs);
+			getData.Name = entity.Name;
+			getData.UpdatedAt = DateTime.UtcNow;
+
+			await _repo.UpdateAsync(getData);
         }
     }
 }

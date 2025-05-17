@@ -18,7 +18,12 @@ namespace Credit_Managment_System_ASP.NET_MVC.Custom_Profiles
             CreateMap<LoanItem, LoanItemVM>().ReverseMap();
             CreateMap<LoanDetail, LoanDetailVM>().ReverseMap();
             CreateMap<Payment, PaymentVM>().ReverseMap();
-        }
+            CreateMap<Product, ProductVM>().ReverseMap();
+            CreateMap<ProductUpdateVM, ProductVM>().ReverseMap();
+			CreateMap<Branch, BranchVM>().ReverseMap();
+			CreateMap<Merchant, MerchantVM>().ReverseMap();
+			
+		}
     }
     
 }

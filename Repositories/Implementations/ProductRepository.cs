@@ -15,9 +15,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations
             _context = context;
             _mapper = mapper;
         }
-        public Task<IEnumerable<Product>> GetAllWithInclude()
+        public async Task<IEnumerable<Product>> GetAllWithInclude()
         {
-           var products = _context.Products
+           var products = await _context.Products
                 .Include(x=>x.Category)
                 .Include(x => x.loanItems)
                 .Where(x => !x.IsDeleted)
@@ -25,9 +25,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations
                 .ContinueWith(task => task.Result.AsEnumerable());
             return products;
         }
-        public Task<Product> GetByIdWithInclude(int id)
+        public async Task<Product> GetByIdWithInclude(int id)
         {
-            var product = _context.Products
+            var product = await _context.Products
                 .Include(x => x.Category)
                 .Include(x => x.loanItems)
                 .Where(x => x.Id == id && !x.IsDeleted)

@@ -8,7 +8,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Interfaces
         Task<ProductVM> GetByIdAsync(int id);
         Task<IEnumerable<ProductVM>> GetAllAsync();
         Task<ProductVM> AddAsync(ProductVM entity);
-        Task UpdateAsync(ProductVM entity);
+        Task UpdateAsync(ProductUpdateVM entity);
         Task<bool> DeleteAsync(int id);
     }
 }

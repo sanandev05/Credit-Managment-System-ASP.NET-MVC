@@ -1,4 +1,4 @@
-﻿@model Credit_Managment_System_ASP.NET_MVC.View_Models.ProductVM
+﻿@model Credit_Managment_System_ASP.NET_MVC.View_Models.MerchantVM
 
 @{
     ViewData["Title"] = "Create";
@@ -7,7 +7,7 @@
 
 <h1>Create</h1>
 
-<h4>Product</h4>
+<h4>Merchant</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -20,37 +20,15 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Logo" class="control-label"></label>
+                <input asp-for="Logo" type="file" class="form-control" />
+                <span asp-validation-for="Logo" class="text-danger"></span>
             </div>
-
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <label asp-for="BranchIDs" class="control-label"></label>
+                <select name="BranchIDs" asp-items="ViewBag.Branches" multiple="multiple" class="listbox"></select>
+                <span asp-validation-for="BranchIDs" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label">Category</label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
-                    <option value="">-- Select SubCategory --</option>
-                </select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" type="file" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-
             <div class="form-group">
                 <label asp-for="CreatedAt" class="control-label"></label>
                 <input asp-for="CreatedAt" readonly value="@DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm")" type="datetime-local" class="form-control" />

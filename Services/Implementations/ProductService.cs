@@ -33,7 +33,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
                 Price = entity.Price,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-
+                Quantity = entity.Quantity,
+                Id = entity.Id,
+                IsDeleted = false
             };
 
             await _repo.AddAsync(product);
@@ -42,11 +44,12 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var getData = _repo.GetByIdAsync(id);
-            if (getData == null)
-            {
-                return false;
-            }
+            //var getData = await _repo.GetByIdAsync(id);
+            //if (getData == null)
+            //{
+            //    return false;
+            //}
+            //getData.IsDeleted = true;
             await _repo.DeleteAsync(id);
             return true;
         }
@@ -65,12 +68,26 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
             return _mapper.Map<ProductVM>(category);
         }
 
-        public async Task UpdateAsync(ProductVM entity)
+        public async Task UpdateAsync(ProductUpdateVM entity)
         {
             var getData = await _repo.GetByIdAsync(entity.Id);
+            if (entity.Category != null)
+            {
+                getData.Category = _mapper.Map<Category>(entity.Category);
+            }
+            getData.Description = entity.Description;
+            getData.ImageUrl = entity.ImageUrl;
+            getData.Name = entity.Name;
+            getData.Price = entity.Price;
+            getData.CategoryId = entity.CategoryId;
+            getData.UpdatedAt = DateTime.UtcNow;
+            getData.CreatedAt = entity.CreatedAt;
+            getData.Quantity = entity.Quantity;
+            getData.IsDeleted = false;
             await _repo.UpdateAsync(getData);
+
         }
 
-        
+
     }
 }
