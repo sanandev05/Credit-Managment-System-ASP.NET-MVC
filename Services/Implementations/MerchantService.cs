@@ -51,13 +51,8 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 
         public async Task<MerchantVM> GetByIdAsync(int id)
         {
-            var allMerchants = await _repo.GetAllAsync();
-            return allMerchants.Select(item => new MerchantVM()
-            {
-                Branches = item.Branches,
-                LogoUrl = item.LogoUrl,
-                Name = item.Name,
-            }).FirstOrDefault(x => x.Id == id);
+            var merchant = await _repo.GetByIdWithInclude(id);
+            return _mapper.Map<MerchantVM>(merchant);   
         }
 
         public async Task UpdateAsync(MerchantVM entity)

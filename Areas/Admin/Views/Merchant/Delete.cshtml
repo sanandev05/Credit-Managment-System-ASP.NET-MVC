@@ -1,0 +1,55 @@
+﻿@model Credit_Managment_System_ASP.NET_MVC.View_Models.MerchantVM
+
+@{
+    ViewData["Title"] = "Delete Merchant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Delete Merchant</h2>
+
+<p>Are you sure you want to delete the following merchant?</p>
+
+<dl class="row">
+    <dt class="col-sm-2">Merchant Name</dt>
+    <dd class="col-sm-10">@Model.Name</dd>
+
+    <dt class="col-sm-2">Logo</dt>
+    <dd class="col-sm-10">
+        @if (!string.IsNullOrEmpty(Model.LogoUrl))
+        {
+            <img src="@Model.LogoUrl" alt="Merchant Logo" style="max-width: 100px; height: auto;" />
+        }
+        else
+        {
+            <p>No logo available.</p>
+        }
+    </dd>
+
+    <dt class="col-sm-2">Branches</dt>
+    <dd class="col-sm-10">
+        @if (Model.Branches != null && Model.Branches.Any())
+        {
+            <ul>
+                @foreach (var branch in Model.Branches)
+                {
+                    <li>@branch.Name</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No branches associated with this merchant.</p>
+        }
+    </dd>
+</dl>
+
+<div class="alert alert-warning">
+    <strong>Warning:</strong> Deleting this merchant will permanently remove it along with any associated branches.
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

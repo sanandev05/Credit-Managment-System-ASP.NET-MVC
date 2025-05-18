@@ -26,11 +26,11 @@ namespace Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations
         }
         public async Task<Merchant> GetByIdWithInclude(int id)
         {
-            var merchants = await _context.Merchants
+            var merchant = await _context.Merchants
                   .Include(x => x.Branches)
                 .Where(x => x.Id == id && !x.IsDeleted)
                 .FirstOrDefaultAsync();
-            return merchants;
+            return merchant;
         }
     }
 
