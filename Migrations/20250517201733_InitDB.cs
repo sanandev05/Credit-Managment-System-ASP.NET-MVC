@@ -119,7 +119,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                         column: x => x.MerchantId,
                         principalTable: "Merchants",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -144,7 +144,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                         column: x => x.BranchId,
                         principalTable: "Branches",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

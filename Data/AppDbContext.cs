@@ -23,13 +23,32 @@ namespace Credit_Managment_System_ASP.NET_MVC.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-         
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<LoanItem>()
             .HasOne(li => li.Loan)
             .WithMany(l => l.LoanItems)
             .HasForeignKey(li => li.LoanId)
-            .OnDelete(DeleteBehavior.Restrict);  
+            .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Branch>()
+                .HasOne(b => b.Merchant)
+                .WithMany(m => m.Branches)
+                .HasForeignKey(b => b.MerchantId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Branch>()
+                .HasMany(b => b.Employees)
+                .WithOne()
+                .HasForeignKey(e => e.BranchId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<Employee>()
+        .HasOne(e => e.Branch)
+        .WithMany(b => b.Employees)
+        .HasForeignKey(e => e.BranchId)
+        .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

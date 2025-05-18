@@ -23,6 +23,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var merchants = await _merchantService.GetAllAsync();
+
             return View(merchants);
         }
         public async Task<IActionResult> Create()

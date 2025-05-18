@@ -1,0 +1,48 @@
+﻿@model Credit_Managment_System_ASP.NET_MVC.View_Models.BranchVM
+
+@{
+    ViewData["Title"] = "Edit Branch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Branch</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNumber" class="control-label"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address" class="control-label"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MerchantId" class="control-label">Merchant</label>
+        <select asp-for="MerchantId" class="form-control" asp-items="ViewBag.Merchants">
+            <option value="">-- Select Merchants --</option>
+        </select>
+        <span asp-validation-for="MerchantId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+

@@ -45,7 +45,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
         public async Task<IEnumerable<MerchantVM>> GetAllAsync()
         {
             var merchants = await _repo.GetAllAsync();
-           
+
             return _mapper.Map<IEnumerable<MerchantVM>>(merchants);
         }
 
@@ -61,6 +61,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
            getData.Name = entity.Name;
             getData.LogoUrl = entity.LogoUrl;
             getData.Branches = entity.Branches;
+
             getData.UpdatedAt = DateTime.UtcNow;
             getData.IsDeleted = false;
 

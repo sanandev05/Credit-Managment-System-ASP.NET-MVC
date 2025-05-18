@@ -408,7 +408,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                     b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Merchant", "Merchant")
                         .WithMany("Branches")
                         .HasForeignKey("MerchantId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Merchant");
@@ -426,7 +426,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                     b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Branch", "Branch")
                         .WithMany("Employees")
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Branch");

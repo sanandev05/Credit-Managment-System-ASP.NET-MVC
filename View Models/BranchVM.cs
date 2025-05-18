@@ -10,8 +10,8 @@ namespace Credit_Managment_System_ASP.NET_MVC.View_Models
         public string Address { get; set; }
 
         public int MerchantId { get; set; }
-        public MerchantVM MerchantVM { get; set; }
+        public MerchantVM? Merchant { get; set; }
 
-        public ICollection<EmployeeVM> EmployeeVMs { get; set; }
+        public ICollection<EmployeeVM>? Employee { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Interfaces
     {
         Task<BranchVM> GetByIdAsync(int id);
         Task<IEnumerable<BranchVM>> GetAllAsync();
-        Task<BranchVM> AddAsync(BranchVM model);
+        Task<BranchVM> CreateAsync(BranchVM model);
         Task UpdateAsync(BranchVM model);
         Task<bool> DeleteAsync(int id);
     }

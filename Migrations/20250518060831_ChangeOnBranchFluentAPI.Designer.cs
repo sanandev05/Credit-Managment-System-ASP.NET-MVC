@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250517233441_InitDB2")]
-    partial class InitDB2
+    [Migration("20250518060831_ChangeOnBranchFluentAPI")]
+    partial class ChangeOnBranchFluentAPI
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -411,7 +411,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                     b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Merchant", "Merchant")
                         .WithMany("Branches")
                         .HasForeignKey("MerchantId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Merchant");
@@ -429,7 +429,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                     b.HasOne("Credit_Managment_System_ASP.NET_MVC.Models.Branch", "Branch")
                         .WithMany("Employees")
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Branch");

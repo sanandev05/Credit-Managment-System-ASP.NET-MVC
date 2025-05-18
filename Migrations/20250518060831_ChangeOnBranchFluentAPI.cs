@@ -5,7 +5,7 @@
 namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDB2 : Migration
+    public partial class ChangeOnBranchFluentAPI : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
