@@ -9,8 +9,8 @@ namespace Credit_Managment_System_ASP.NET_MVC.View_Models
         public string PhoneNumber { get; set; }
 
         public int BranchId { get; set; }
-        public BranchVM BranchVM { get; set; }
+        public BranchVM? Branch { get; set; }
 
-        public ICollection<LoanVM> LoansCreatedVMs { get; set; }
+        public ICollection<LoanVM>? LoansCreatedVMs { get; set; }
     }
 }
