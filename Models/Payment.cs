@@ -6,6 +6,6 @@
         public DateTime PaymentDate { get; set; }
 
         public int LoanId { get; set; }
-        public Loan Loan { get; set; }
+        public Loan? Loan { get; set; }
     }
 }

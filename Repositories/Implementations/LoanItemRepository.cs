@@ -2,6 +2,7 @@
 using Credit_Managment_System_ASP.NET_MVC.Data;
 using Credit_Managment_System_ASP.NET_MVC.Models;
 using Credit_Managment_System_ASP.NET_MVC.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations
 {
@@ -13,6 +14,20 @@ namespace Credit_Managment_System_ASP.NET_MVC.Repositories.Implementations
         {
             _context = _context;
             _mapper = mapper;
+        }
+        public async Task<IEnumerable<LoanItem>> GetAllWithIncludeAsync()
+        {
+            return await _context.LoanItems
+                .Include(l => l.Loan)
+                .Include(l => l.Product)
+                .ToListAsync();
+        }
+        public async Task<LoanItem> GetByIdWithIncludeAsync(int id)
+        {
+            return await _context.LoanItems
+                .Include(l => l.Loan)
+                .Include(l => l.Product)
+                .FirstOrDefaultAsync(l => l.Id == id);
         }
 
     }

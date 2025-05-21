@@ -7,7 +7,7 @@
         public decimal Price { get; set; }
 
         public int LoanId { get; set; }
-        public Loan Loan { get; set; }
+        public Loan? Loan { get; set; }
 
         public int ProductId { get; set; }
         public Product Product { get; set; }

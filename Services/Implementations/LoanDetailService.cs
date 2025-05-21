@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Credit_Managment_System_ASP.NET_MVC.Models;
 using Credit_Managment_System_ASP.NET_MVC.Repositories.Interfaces;
+using Credit_Managment_System_ASP.NET_MVC.Services.Interfaces;
 using Credit_Managment_System_ASP.NET_MVC.View_Models;
 
 namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 {
-    public class LoanDetailService
+    public class LoanDetailService : ILoanDetailService
     {
         private readonly IGenericRepository<LoanDetail> _repo;
         private readonly IMapper _mapper;
