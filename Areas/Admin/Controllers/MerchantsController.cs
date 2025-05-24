@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Credit_Managment_System_ASP.NET_MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class MerchantController : Controller
+    public class MerchantsController : Controller
     {
         private readonly IWebHostEnvironment _env;
         private readonly IMerchantService _merchantService;
         private readonly IBranchService _branchService;
         private readonly IMapper _mapper;
-        public MerchantController(IMerchantService merchantService, IWebHostEnvironment webHost, IBranchService branchService, IMapper mapper)
+        public MerchantsController(IMerchantService merchantService, IWebHostEnvironment webHost, IBranchService branchService, IMapper mapper)
         {
             _merchantService = merchantService;
             _env = webHost;

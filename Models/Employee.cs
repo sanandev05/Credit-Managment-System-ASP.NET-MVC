@@ -7,9 +7,9 @@
         public string PhoneNumber { get; set; }
 
         public int BranchId { get; set; }
-        public Branch Branch { get; set; }
+        public Branch? Branch { get; set; }
 
-        public ICollection<Loan> LoansCreated { get; set; }
+        public ICollection<Loan>? LoansCreated { get; set; }
     }
     
 }

@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Credit_Managment_System_ASP.NET_MVC.Models;
 using Credit_Managment_System_ASP.NET_MVC.Repositories.Interfaces;
+using Credit_Managment_System_ASP.NET_MVC.Services.Interfaces;
 using Credit_Managment_System_ASP.NET_MVC.View_Models;
 
 namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 {
-    public class EmployeeService
+    public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _repo;
         private readonly IMapper _mapper;
@@ -23,7 +24,6 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
 
             var employee = new Employee
             {
-                Branch = _mapper.Map<Branch>(entity.BranchVM),
                 BranchId = entity.BranchId,
                 LoansCreated = _mapper.Map<ICollection<Loan>>(entity.LoansCreatedVMs),
                 PhoneNumber = entity.PhoneNumber,
@@ -37,48 +37,57 @@ namespace Credit_Managment_System_ASP.NET_MVC.Services.Implementations
             return _mapper.Map<EmployeeVM>(employee);
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var getData = _repo.GetByIdAsync(id);
+            var getData = _repo.GetByIdWithInclude(id);
             if (getData == null)
             {
-                return Task.FromResult(false);
+                return false;
             }
-            _repo.DeleteAsync(id);
-            return Task.FromResult(true);
+           await _repo.DeleteAsync(id);
+            return true;
         }
 
         public async Task<IEnumerable<EmployeeVM>> GetAllAsync()
         {
-            var employees = await _repo.GetAllAsync();
+            var employees = await _repo.GetAllWithInclude();
             return _mapper.Map<IEnumerable<EmployeeVM>>(employees);
         }
 
         public async Task<EmployeeVM> GetByIdAsync(int id)
         {
-            var employees = await _repo.GetAllAsync();
-            if (employees == null)
+            var employee = await _repo.GetByIdWithInclude(id);
+            if (employee == null)
             {
                 return null;
             }
-
-            return employees.Select(item => new EmployeeVM()
+            var data = new EmployeeVM()
             {
-                Name = item.Name,
-               Surname= item.Surname,
-                PhoneNumber = item.PhoneNumber,
-                BranchId = item.BranchId,
-                BranchVM = _mapper.Map<BranchVM>(item.Branch),
-                LoansCreatedVMs = _mapper.Map<ICollection<LoanVM>>(item.LoansCreated),
-                CreatedAt = item.CreatedAt,
-                UpdatedAt = item.UpdatedAt,
-            }).FirstOrDefault(x => x.Id == id);
+                Name = employee.Name,
+                Surname = employee.Surname,
+                PhoneNumber = employee.PhoneNumber,
+                BranchId = employee.BranchId,
+                Branch = _mapper.Map<BranchVM>(employee.Branch),
+                LoansCreatedVMs = _mapper.Map<ICollection<LoanVM>>(employee.LoansCreated),
+                CreatedAt = employee.CreatedAt,
+                UpdatedAt = employee.UpdatedAt,
+            };
+            return data;
         }
 
         public async Task UpdateAsync(EmployeeVM entity)
         {
             var getData = await _repo.GetByIdAsync(entity.Id);
+            getData.Surname = entity.Surname;
+            getData.PhoneNumber = entity.PhoneNumber;
+            getData.BranchId = entity.BranchId;
+            getData.Branch= _mapper.Map<Branch>(entity.Branch);
+            getData.CreatedAt = entity.CreatedAt;
+            getData.UpdatedAt = entity.UpdatedAt;
+            getData.LoansCreated = _mapper.Map<ICollection<Loan>>(entity.LoansCreatedVMs);
             await _repo.UpdateAsync(getData);
         }
+
+      
     }
 }

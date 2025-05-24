@@ -1,0 +1,29 @@
+﻿@model Credit_Managment_System_ASP.NET_MVC.View_Models.EmployeeVM
+
+@{
+    ViewData["Title"] = "Delete Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete Employee</h1>
+
+<div class="alert alert-warning">
+    <strong>Warning!</strong> Are you sure you want to delete the employee <strong>@Model.Name @Model.Surname</strong>?
+</div>
+
+<div>
+    <h3>Employee Details</h3>
+    <ul>
+        <li><strong>Name:</strong> @Model.Name</li>
+        <li><strong>Surname:</strong> @Model.Surname</li>
+        <li><strong>Phone Number:</strong> @Model.PhoneNumber</li>
+        <li><strong>Branch:</strong> @Model.Branch?.Name</li>
+    </ul>
+</div>
+
+<form asp-action="DeleteConfirm" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary"> Back</a>
+</form>

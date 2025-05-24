@@ -20,14 +20,6 @@ builder.Services.AddScoped<IMerchantRepository, MerchantRepository>();
 builder.Services.AddScoped<IMerchantService, MerchantService>();
 builder.Services.AddScoped<IBranchRepository, BranchRepository>();
 builder.Services.AddScoped<IBranchService, BranchService>();
-builder.Services.AddScoped<ILoanRepository, LoanRepository>();
-builder.Services.AddScoped<ILoanService, LoanService>();
-builder.Services.AddScoped<ILoanDetailRepository, LoanDetailRepository>();
-builder.Services.AddScoped<ILoanDetailService, LoanDetailService>();
-builder.Services.AddScoped<ILoanItemRepository, LoanItemRepository>();
-builder.Services.AddScoped<ILoanItemService, LoanItemService>();
-builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
-builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 var app = builder.Build();
 

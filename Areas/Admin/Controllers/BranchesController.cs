@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Credit_Managment_System_ASP.NET_MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BranchController : Controller
+    public class BranchesController : Controller
     {
         private readonly IBranchService _branchService;
         private readonly IMerchantService _merchantService;
 
-        public BranchController(IBranchService branchService, IMerchantService merchantService)
+        public BranchesController(IBranchService branchService, IMerchantService merchantService)
         {
             _branchService = branchService;
             _merchantService = merchantService;

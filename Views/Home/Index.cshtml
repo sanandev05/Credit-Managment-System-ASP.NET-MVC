@@ -1,8 +1,18 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Admin Home";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Admin Dashboard</h1>
+
+<div class="list-group">
+    <a href="@Url.Action("Index", "Merchant", new { area = "Admin" })" class="list-group-item list-group-item-action">
+        <strong>Merchant</strong> - View and manage merchants.
+    </a>
+    <a href="@Url.Action("Index", "Branch", new { area = "Admin" })" class="list-group-item list-group-item-action">
+        <strong>Branch</strong> - View and manage branches.
+    </a>
+    <a href="@Url.Action("Index", "Employee", new { area = "Admin" })" class="list-group-item list-group-item-action">
+        <strong>Employee</strong> - View and manage employees.
+    </a>
 </div>
