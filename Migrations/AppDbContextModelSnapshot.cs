@@ -198,6 +198,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                     b.Property<decimal>("LoanAmount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 

@@ -7,6 +7,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.View_Models
         public decimal LoanAmount { get; set; }
 
         public DateTime DateOfApplication { get; set; }
+        public LoanStatus Status { get; set; } = LoanStatus.Pending;
 
         public int CustomerId { get; set; }
         public CustomerVM CustomerVM { get; set; }

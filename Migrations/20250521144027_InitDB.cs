@@ -155,6 +155,7 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LoanAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DateOfApplication = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),

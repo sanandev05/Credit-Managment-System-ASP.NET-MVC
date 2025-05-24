@@ -5,7 +5,7 @@
         public decimal LoanAmount { get; set; }
        
         public DateTime DateOfApplication { get; set; }
-
+        public LoanStatus Status { get; set; } = LoanStatus.Pending;
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 

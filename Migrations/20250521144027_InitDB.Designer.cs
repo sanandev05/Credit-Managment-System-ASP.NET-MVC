@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250518232957_InitDB")]
+    [Migration("20250521144027_InitDB")]
     partial class InitDB
     {
         /// <inheritdoc />
@@ -200,6 +200,9 @@ namespace Credit_Managment_System_ASP.NET_MVC.Migrations
 
                     b.Property<decimal>("LoanAmount")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
